@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CalorieCounter</string>
+    <string name="Ingredients">Ingredients</string>
+    <string name="Description">Description</string>
+    <string name="Title">Title</string>
+    <string name="Save">Save</string>
+    <string name="Add_ingredients">Add ingredients</string>
 </resources>
