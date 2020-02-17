@@ -30,7 +30,6 @@
         </activity>
         <activity android:name=".activity.AccountSignUpActivity" />
         <activity android:name=".activity.AccountLoginActivity" />
-        <activity android:name=".ListFragment" />
     </application>
 
 </manifest>
