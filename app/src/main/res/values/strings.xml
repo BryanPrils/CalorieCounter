@@ -1,10 +1,5 @@
 <resources>
-    <string name="app_name">CalorieCounter</string>
-    <string name="Ingredients">Ingredients</string>
-    <string name="Description">Description</string>
-    <string name="Title">Title</string>
-    <string name="Save">Save</string>
-    <string name="Add_ingredients">Add ingredients</string>
+    <string name="app_name">CalorieCounter</string>>
     <string name="lbl_forgot_password">Forgot password</string>
     <string name="forgot_password_msg">We just need your registered Email Address to sen you.</string>
     <string name="hint_email">Email</string>
@@ -17,4 +12,11 @@
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
     <string name="btn_register">Register</string>
     <string name="btn_sign_in">Already registered? Click here!</string>
+    <string name="Add">ADD</string>
+    <string name="username_hint">Username</string>
+    <string name="btn_new_user">New user</string>
+    <string name="Title">Title</string>
+    <string name="description">Description</string>
+    <string name="close">Close</string>
+    <string name="total_cal">total calories:</string>
 </resources>

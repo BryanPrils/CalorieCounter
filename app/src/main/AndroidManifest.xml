@@ -12,24 +12,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:fullBackupContent="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ResetPasswordActivity"></activity>
-        <activity android:name=".activity.Splashscreen">
+        <activity android:name=".activity.FoodListActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
-        <activity android:name=".activity.AccountSignUpActivity" />
-        <activity android:name=".activity.AccountLoginActivity" />
+        <activity android:name=".activity.AccountLoginActivity">
+
+        </activity>
     </application>
 
 </manifest>

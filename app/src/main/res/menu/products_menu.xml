@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.MainActivity">
     <item
-        android:id="@+id/save_note"
-        android:icon="@drawable/ic_save"
-        android:title="@string/Save"
+        android:id="@+id/add_food"
+        android:icon="@drawable/ic_add"
+        android:title="@string/Add"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/logoff"
+        android:icon="@drawable/ic_close"
+        android:title="@string/close"
         app:showAsAction="ifRoom" />
 
 </menu>

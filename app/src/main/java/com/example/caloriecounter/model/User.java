@@ -2,19 +2,14 @@ package com.example.caloriecounter.model;
 
 public class User {
     private String username;
-    private String password;
     private String email;
-    private double weight;
 
-    public User(String username, String password, String email,
-                double weight){
+    public User(String username, String email) {
         this.username = username;
-        this.password = password;
         this.email = email;
-        this.weight = weight;
     }
 
-    public User(){
+    public User() {
     }
 
     public String getUsername() {
@@ -25,14 +20,6 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -41,11 +28,4 @@ public class User {
         this.email = email;
     }
 
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
 }
