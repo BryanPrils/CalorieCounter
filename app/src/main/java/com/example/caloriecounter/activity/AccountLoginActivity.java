@@ -1,10 +1,8 @@
 package com.example.caloriecounter.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -22,12 +20,12 @@ import java.util.List;
 public class AccountLoginActivity extends AppCompatActivity {
 
     private static final int MY_REQUEST_CODE = 123;
+    private static final String SHARED_PREFS = "sharedPrefs";
     List<AuthUI.IdpConfig> providers;
 
-    private EditText inputEmail, inputPassword;
+
     private FirebaseAuth auth;
-    private ProgressBar progressBar;
-    private Button btnLogin, btnReset, btnNewUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +55,15 @@ public class AccountLoginActivity extends AppCompatActivity {
         if (requestCode == MY_REQUEST_CODE) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
             if (resultCode == RESULT_OK) {
+
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 startActivity(new Intent(this, MainActivity.class));
+                SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("text", user.getEmail());
+                editor.apply();
                 finish();
-                Toast.makeText(this, "Welcome! " + user.getDisplayName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Welcome! " + user.getEmail(), Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "" + response.getError().getMessage(), Toast.LENGTH_LONG).show();
             }
