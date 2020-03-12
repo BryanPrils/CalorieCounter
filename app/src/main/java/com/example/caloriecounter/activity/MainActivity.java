@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.caloriecounter.R;
 import com.example.caloriecounter.adapter.MyAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     public static TextView textViewTotalCal;
     public static List<UserDiary> diaries;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private CollectionReference userDiaryRef = db.collection("userDiary");
     private MyAdapter mAdapter;
     private int totalcal;
@@ -44,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         textViewTotalCal = findViewById(R.id.tv_total_cal);
         diaries = new LinkedList<>();
 
-        setUpRecyclerView();
 
+        setUpRecyclerView();
 
     }
 
@@ -53,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
     private void setUpRecyclerView() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.FRENCH);
         Date today = Calendar.getInstance().getTime();
-        Query query = userDiaryRef.whereEqualTo("date", dateFormat.format(today));
+        Query query = userDiaryRef.whereEqualTo("date", dateFormat.format(today))
+                .whereEqualTo("email", user.getEmail());
 
         FirestoreRecyclerOptions<UserDiary> options = new FirestoreRecyclerOptions.Builder<UserDiary>()
                 .setQuery(query, UserDiary.class)
@@ -81,12 +85,22 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.add_food) {
             startActivityForResult(new Intent(MainActivity.this, FoodListActivity.class), 1);
+        }
+        switch (item.getItemId()) {
+            case R.id.add_food:
+                startActivityForResult(new Intent(MainActivity.this, FoodListActivity.class), 1);
+                return true;
+            case R.id.logout:
+                startActivity(new Intent(MainActivity.this, AccountLoginActivity.class));
+                return true;
+            case R.id.settings:
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
 
         }
-        if (item.getItemId() == R.id.logoff) {
-            startActivityForResult(new Intent(MainActivity.this, AccountLoginActivity.class), 1);
-        }
-        return super.onOptionsItemSelected(item);
+
     }
 
 

@@ -4,18 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.MainActivity">
     <item
-        android:id="@+id/add_food"
-        android:icon="@drawable/ic_add"
+        android:id="@+id/add_new_food"
+        android:icon="@drawable/ic_photo_camera"
         android:title="@string/Add"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/settings"
-        android:title="@string/settings"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/logout"
-        android:title="@string/logout"
-        app:showAsAction="never" />
 
 
 </menu>

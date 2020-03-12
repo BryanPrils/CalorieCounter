@@ -6,15 +6,18 @@ public class Food {
     private String name;
     private String description;
     private int calories;
+    private String imagePath = "/home/bryan/Desktop/mobiledev/CalorieCounter/app/src/main/res/drawable/appel.jpeg";
+
 
     public Food() {
     }
 
 
-    public Food(String name, String description, int calories) {
+    public Food(String name, String description, int calories, String imagePath) {
         this.name = name;
         this.description = description;
         this.calories = calories;
+        this.imagePath = imagePath;
     }
 
     public String getName() {
@@ -42,6 +45,14 @@ public class Food {
         this.calories = calories;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,11 +60,12 @@ public class Food {
         Food food = (Food) o;
         return getCalories() == food.getCalories() &&
                 getName().equals(food.getName()) &&
-                Objects.equals(getDescription(), food.getDescription());
+                getDescription().equals(food.getDescription()) &&
+                Objects.equals(getImagePath(), food.getImagePath());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getDescription(), getCalories());
+        return Objects.hash(getName(), getDescription(), getCalories(), getImagePath());
     }
 }

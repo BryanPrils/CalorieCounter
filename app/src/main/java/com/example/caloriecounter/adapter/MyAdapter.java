@@ -29,7 +29,7 @@ public class MyAdapter extends FirestoreRecyclerAdapter<UserDiary, MyAdapter.Use
             total += diaries.get(i).getCalories();
         }
 
-        MainActivity.textViewTotalCal.setText(R.string.total_cal + " " + total);
+        MainActivity.textViewTotalCal.setText("Total Calories" + " " + total);
     }
 
     @Override
