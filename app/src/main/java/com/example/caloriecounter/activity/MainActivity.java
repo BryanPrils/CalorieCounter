@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,8 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private CollectionReference userDiaryRef = db.collection("userDiary");
     private MyAdapter mAdapter;
-    private int totalcal;
-    private RecyclerView recyclerView;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +46,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textViewTotalCal = findViewById(R.id.tv_total_cal);
         diaries = new LinkedList<>();
-
-
         setUpRecyclerView();
-
     }
-
 
     private void setUpRecyclerView() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.FRENCH);
@@ -65,11 +61,27 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new MyAdapter(options);
 
-        recyclerView = findViewById(R.id.recycler_view_main);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(mAdapter);
+        mRecyclerView = findViewById(R.id.recycler_view_main);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mAdapter);
 
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                mAdapter.deleteItem(viewHolder.getAdapterPosition());
+                diaries.remove(viewHolder.getAdapterPosition());
+                MyAdapter.calculateCalories(diaries);
+
+            }
+        }).attachToRecyclerView(mRecyclerView);
+        MyAdapter.calculateCalories(diaries);
 
     }
 
@@ -78,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.products_menu, menu);
         return super.onCreateOptionsMenu(menu);
-
     }
 
     @Override
@@ -98,9 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-
         }
-
     }
 
 
@@ -115,6 +124,4 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         mAdapter.stopListening();
     }
-
-
 }

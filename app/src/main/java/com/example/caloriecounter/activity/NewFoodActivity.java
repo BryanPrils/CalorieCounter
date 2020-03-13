@@ -11,12 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.caloriecounter.R;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -27,22 +29,17 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
-
 import model.Food;
 
 public class NewFoodActivity extends AppCompatActivity {
 
     static final int PICK_IMAGE_REQUEST = 1;
-    public final String APP_TAG = "CalorieCounter";
-    public String photoFileName = "photo.jpg";
     private ImageView mImageView;
     private ProgressBar mProgressBar;
     private EditText mEditTextName;
     private EditText mEditTextDecription;
     private EditText mEditTextCalories;
     private Button mbtnsaveFood;
-    private File mPhotofile;
     private Uri mImageUri;
 
 
@@ -63,9 +60,6 @@ public class NewFoodActivity extends AppCompatActivity {
         mbtnsaveFood = findViewById(R.id.btn_save_food);
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
-
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-
 
     }
 
@@ -115,9 +109,18 @@ public class NewFoodActivity extends AppCompatActivity {
             final String description = mEditTextDecription.getText().toString();
             final int calories = Integer.parseInt(mEditTextCalories.getText().toString());
             final StorageReference imageRef = mStorageRef.child("images/" + mImageUri.getLastPathSegment());
-            UploadTask uploadTask = imageRef.putFile(mImageUri);
+            final UploadTask uploadTask = imageRef.putFile(mImageUri);
+
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(NewFoodActivity.this, "Recipe added", Toast.LENGTH_SHORT).show();
+
+                }
+            });
 
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     StorageMetadata snapshotMetadata = taskSnapshot.getMetadata();
@@ -130,6 +133,8 @@ public class NewFoodActivity extends AppCompatActivity {
                         }
                     });
                 }
+
+
             });
 
             finish();

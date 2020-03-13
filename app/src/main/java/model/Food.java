@@ -6,7 +6,7 @@ public class Food {
     private String name;
     private String description;
     private int calories;
-    private String imagePath = "/home/bryan/Desktop/mobiledev/CalorieCounter/app/src/main/res/drawable/appel.jpeg";
+    private String imagePath = "https://firebasestorage.googleapis.com/v0/b/calariecounter.appspot.com/o/images%2Fimage%3A99?alt=media&token=3eb5810e-03ff-464f-b09e-d93f6bbebcef";
 
 
     public Food() {

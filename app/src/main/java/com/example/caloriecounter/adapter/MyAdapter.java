@@ -23,7 +23,7 @@ public class MyAdapter extends FirestoreRecyclerAdapter<UserDiary, MyAdapter.Use
         super(options);
     }
 
-    private static void calculateCalories(List<UserDiary> diaries) {
+    public static void calculateCalories(List<UserDiary> diaries) {
         int total = 0;
         for (int i = 0; i < diaries.size(); i++) {
             total += diaries.get(i).getCalories();
@@ -40,6 +40,11 @@ public class MyAdapter extends FirestoreRecyclerAdapter<UserDiary, MyAdapter.Use
         calculateCalories(MainActivity.diaries);
 
     }
+
+    public void deleteItem(int position) {
+        getSnapshots().getSnapshot(position).getReference().delete();
+    }
+
 
     @NonNull
     @Override

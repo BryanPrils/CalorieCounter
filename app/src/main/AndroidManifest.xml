@@ -16,22 +16,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name=".activity.SettingsActivity"></activity>
+        <activity android:name=".fragment.DetailFragment"></activity>
+        <activity android:name=".fragment.ListFragment" />
+        <activity android:name=".activity.SettingsActivity" />
         <activity android:name=".activity.NewFoodActivity" />
         <activity android:name=".activity.FoodListActivity" />
-        <activity android:name="com.example.caloriecounter.activity.DetailActivity"></activity>
+        <activity android:name=".activity.DetailActivity" />
         <activity android:name=".activity.MainActivity">
 
+        </activity>
+        <activity android:name=".activity.AccountLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activity.AccountLoginActivity">
-
-
         </activity>
 
         <service android:name=".notifications.MyFirebaseMessagingService">

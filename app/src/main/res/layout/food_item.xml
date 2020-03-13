@@ -27,18 +27,17 @@
             android:id="@+id/tv_calories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_title"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/image_food"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
+
             android:adjustViewBounds="true"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY" />-->
 
 
         <!--<TextView
