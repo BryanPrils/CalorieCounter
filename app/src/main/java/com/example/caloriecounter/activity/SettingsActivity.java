@@ -17,34 +17,32 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SettingsActivity extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String TEXT = "text";
-    private TextView textViewUser;
-    private EditText editTextUserEmail;
-    private EditText editTextUserPassword;
-    private Button btnUpdateUser;
-    private FirebaseUser user;
-    private FirebaseAuth auth;
+    public static final String TEXT = "mText";
+    private TextView mTextViewUser;
+    private EditText mEditTextUserEmail;
+    private Button mBtnUpdateUser;
+    private FirebaseUser mUser;
+    private FirebaseAuth mAuth;
 
-    private String text;
+    private String mText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        textViewUser = findViewById(R.id.tv_username);
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        editTextUserEmail = findViewById(R.id.edit_user_email);
-        editTextUserPassword = findViewById(R.id.edit_user_password);
-        btnUpdateUser = findViewById(R.id.btn_update_user);
+        mTextViewUser = findViewById(R.id.tv_username);
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mEditTextUserEmail = findViewById(R.id.edit_user_email);
+        mBtnUpdateUser = findViewById(R.id.btn_update_user);
 
-        btnUpdateUser.setOnClickListener(new View.OnClickListener() {
+        mBtnUpdateUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveData();
             }
         });
 
-        auth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         loadData();
 
     }
@@ -53,14 +51,14 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        if (TextUtils.isEmpty(editTextUserEmail.getText().toString())) {
+        if (TextUtils.isEmpty(mEditTextUserEmail.getText().toString())) {
             Toast.makeText(this, "you have to fill in a email addres", Toast.LENGTH_SHORT).show();
         } else {
-            user.updateEmail(editTextUserEmail.getText().toString());
-            editor.putString("text", editTextUserEmail.getText().toString());
+            mUser.updateEmail(mEditTextUserEmail.getText().toString());
+            editor.putString("mText", mEditTextUserEmail.getText().toString());
             editor.apply();
-            textViewUser.setText(editTextUserEmail.getText().toString());
-            editTextUserEmail.setText("");
+            mTextViewUser.setText(mEditTextUserEmail.getText().toString());
+            mEditTextUserEmail.setText("");
 
         }
 
@@ -68,8 +66,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        text = (sharedPreferences.getString(TEXT, ""));
-        textViewUser.setText(text);
+        mText = (sharedPreferences.getString(TEXT, ""));
+        mTextViewUser.setText(mText);
 
     }
 }
