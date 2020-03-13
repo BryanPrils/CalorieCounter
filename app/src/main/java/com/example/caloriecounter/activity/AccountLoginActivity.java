@@ -24,14 +24,14 @@ public class AccountLoginActivity extends AppCompatActivity {
     List<AuthUI.IdpConfig> providers;
 
 
-    private FirebaseAuth auth;
+    private FirebaseAuth mAuth;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_login);
-        auth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
